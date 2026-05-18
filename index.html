@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spectrum Studio Pro — Audio Visualizer & Video Editor</title>
+<meta name="description" content="Turn your audio into stunning visual productions. Multi-track timeline, AI voice, 4K export — all in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0d17;
+  --bg2:#141829;
+  --bg3:rgba(30,36,56,0.95);
+  --tp:#a18cd1;
+  --ts:#8fd3f4;
+  --accent:#ff7eb3;
+  --accent2:#a18cd1;
+  --border:rgba(161,140,209,0.15);
+  --glow:rgba(255,126,179,0.18);
+  --r:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tp);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(11,13,23,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#a18cd1,#ff7eb3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--ts);text-decoration:none;font-size:0.875rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:linear-gradient(135deg,#ff7eb3,#a18cd1);color:#fff;border:none;padding:.5rem 1.25rem;border-radius:999px;font-size:.875rem;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .2s,transform .2s}
+.nav-cta:hover{opacity:.9;transform:scale(1.03)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 5% 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-20%;left:30%;width:700px;height:700px;background:radial-gradient(circle,rgba(161,140,209,.12) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:0;right:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,126,179,.08) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(161,140,209,.1);border:1px solid rgba(161,140,209,.25);border-radius:999px;padding:.35rem 1rem;font-size:.75rem;font-weight:600;color:var(--ts);margin-bottom:1.5rem;letter-spacing:.05em}
+.hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+.hero h1{font-size:clamp(2.5rem,6vw,5rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:1.25rem;max-width:900px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,#ff7eb3,#a18cd1,#8fd3f4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(1rem,2vw,1.25rem);color:var(--ts);max-width:620px;line-height:1.65;margin-bottom:2.5rem;font-weight:400}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem}
+.btn-primary{background:linear-gradient(135deg,#ff7eb3,#a18cd1);color:#fff;border:none;padding:.85rem 2rem;border-radius:999px;font-size:1rem;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 24px rgba(255,126,179,.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,126,179,.4)}
+.btn-secondary{background:transparent;color:var(--tp);border:1px solid var(--border);padding:.85rem 2rem;border-radius:999px;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;transition:border-color .2s,color .2s}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.hero-social{display:flex;align-items:center;gap:.5rem;color:var(--ts);font-size:.85rem}
+.stars{color:#fbbf24;letter-spacing:1px}
+
+/* FEATURES */
+.features{padding:0 5% 80px}
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:5%;align-items:center;padding:80px 0;border-bottom:1px solid var(--border)}
+.feature:last-child{border-bottom:none}
+.feature.reverse .feat-text{order:2}
+.feature.reverse .feat-media{order:1}
+.feat-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:rgba(255,126,179,.1);border:1px solid rgba(255,126,179,.2);border-radius:999px;padding:.25rem .75rem;margin-bottom:1rem}
+.feat-text h2{font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:1rem;color:#fff}
+.feat-text h2 em{font-style:normal;background:linear-gradient(135deg,#ff7eb3,#a18cd1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.feat-text p{font-size:1rem;line-height:1.7;color:var(--ts);margin-bottom:1.5rem}
+.feat-bullets{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.feat-bullets li{display:flex;align-items:flex-start;gap:.6rem;font-size:.9rem;color:var(--tp)}
+.feat-bullets li::before{content:'✦';color:var(--accent);flex-shrink:0;margin-top:1px}
+.badge-free,.badge-pro{font-size:.65rem;font-weight:700;border-radius:999px;padding:.15rem .55rem;display:inline-block;margin-left:.4rem}
+.badge-free{background:rgba(143,211,244,.15);color:#8fd3f4;border:1px solid rgba(143,211,244,.3)}
+.badge-pro{background:rgba(255,126,179,.15);color:#ff7eb3;border:1px solid rgba(255,126,179,.3)}
+
+/* VIDEO PLACEHOLDER */
+.feat-media{border-radius:var(--r);overflow:hidden;background:var(--bg2);border:1px solid var(--border);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.feat-media::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(161,140,209,.05),rgba(255,126,179,.05));pointer-events:none}
+.vid-placeholder{display:flex;flex-direction:column;align-items:center;gap:.75rem;color:var(--ts);opacity:.5}
+.vid-placeholder svg{width:48px;height:48px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.vid-placeholder p{font-size:.8rem;font-weight:500}
+/* Replace .feat-media with a real video like:
+   <video src="videos/feature-1.mp4" autoplay muted loop playsinline></video> */
+.feat-media video{width:100%;height:100%;object-fit:cover}
+
+/* SECTION LABEL */
+.section-intro{text-align:center;padding:100px 5% 20px}
+.section-intro h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:.75rem}
+.section-intro h2 em{font-style:normal;background:linear-gradient(135deg,#ff7eb3,#a18cd1,#8fd3f4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.section-intro p{font-size:1.05rem;color:var(--ts);max-width:560px;margin:0 auto;line-height:1.65}
+
+/* PRICING */
+.pricing{padding:60px 5% 80px}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:860px;margin:0 auto}
+.plan-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:2.5rem;position:relative}
+.plan-pro{border-color:rgba(255,126,179,.4);background:linear-gradient(135deg,rgba(255,126,179,.05),rgba(161,140,209,.05))}
+.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ff7eb3,#a18cd1);color:#fff;font-size:.7rem;font-weight:800;padding:.25rem 1rem;border-radius:999px;white-space:nowrap}
+.plan-label{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ts);margin-bottom:.5rem}
+.plan-price{font-size:3rem;font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:.25rem}
+.plan-price span{font-size:1rem;color:var(--ts);font-weight:400}
+.plan-desc{font-size:.85rem;color:var(--ts);margin-bottom:1.5rem}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem}
+.plan-features li{font-size:.875rem;color:var(--tp)}
+@media(max-width:640px){.pricing-grid{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{padding:60px 5% 80px}
+.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:.75rem}
+.faq-item{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.faq-item summary{padding:1.25rem 1.5rem;font-size:.95rem;font-weight:600;color:#fff;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq-item summary::after{content:'+';color:var(--accent);font-size:1.25rem;font-weight:300;flex-shrink:0}
+.faq-item[open] summary::after{content:'−'}
+.faq-item p{padding:0 1.5rem 1.25rem;color:var(--ts);font-size:.9rem;line-height:1.65}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:1.5rem;align-items:center;text-align:center}
+.footer-brand p{color:var(--ts);font-size:.875rem;margin-top:.35rem}
+.footer-links{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center}
+.footer-links a{color:var(--ts);text-decoration:none;font-size:.875rem;transition:color .2s}
+.footer-links a:hover{color:var(--accent)}
+.footer-copy{color:rgba(143,211,244,.4);font-size:.8rem}
+
+@media(max-width:768px){
+  .feature{grid-template-columns:1fr;gap:2rem}
+  .feature.reverse .feat-text{order:1}
+  .feature.reverse .feat-media{order:2}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">⚡ Spectrum Studio Pro</span>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://buy.polar.sh/polar_cl_VJxYzCmECdNj0BoWlEFWf6WSoJj5HDme3osSp2bLeTq" class="nav-cta">Get Pro — $4.99</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span></span> Chrome Extension · v1.3.3</div>
+  <h1>Turn audio into <em>stunning visual productions</em></h1>
+  <p class="hero-sub">Multi-track timeline editor, AI transcription, voice synthesis, and 4K export — all running directly in your browser. No installs, no subscriptions.</p>
+  <div class="hero-btns">
+    <a href="https://chromewebstore.google.com" class="btn-primary">Add to Chrome — It's Free</a>
+    <a href="#features" class="btn-secondary">See Features ↓</a>
+  </div>
+  <div class="hero-social">
+    <span class="stars">★★★★★</span>
+    <span>Loved by creators · One-time $4.99 Pro</span>
+  </div>
+</section>
+
+<!-- FEATURES INTRO -->
+<div class="section-intro">
+  <h2>Everything you need to create <em>pro-quality</em> audio videos</h2>
+  <p>From real-time visualizers to AI-powered voice tools — Spectrum Studio Pro has it all, right inside Chrome.</p>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+
+  <!-- FEATURE 1: Audio Waveforms -->
+  <div class="feature">
+    <div class="feat-text">
+      <span class="feat-tag">Feature 01</span>
+      <h2>Beautiful <em>audio-reactive</em> waveforms</h2>
+      <p>Drop in your audio and watch it come alive. Spectrum Studio renders stunning real-time visualizations synced perfectly to every beat, bass hit, and frequency.</p>
+      <ul class="feat-bullets">
+        <li>25+ visualizer types — Cosmic Web, Quantum Strings, Orbital Rings, Smooth Wave, Neon Bars and more</li>
+        <li>15+ curated color palettes including Cyberpunk, Aurora, Chill Wave, Void Space</li>
+        <li>Custom palette builder — design your own color scheme</li>
+        <li>Live Tab capture — visualize Spotify, YouTube, or any web audio in real time</li>
+      </ul>
+    </div>
+    <div class="feat-media" id="vid1">
+      <!-- Replace with: <video src="videos/waveforms.mp4" autoplay muted loop playsinline></video> -->
+      <div class="vid-placeholder">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <p>waveforms.mp4</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 2: Cards + TTS -->
+  <div class="feature reverse">
+    <div class="feat-text">
+      <span class="feat-tag">Feature 02</span>
+      <h2>Rich <em>animated cards</em> with AI voice</h2>
+      <p>Add beautiful overlay cards to your timeline with titles, descriptions, and avatars. Then bring them to life with one-click AI voice narration using ElevenLabs or Azure.</p>
+      <ul class="feat-bullets">
+        <li>Liquid Glass cards — real-time WebGL refraction shader (Apple-style frosted glass)</li>
+        <li>Templates: Glass Mail, Notification, Article, Call, Info and more</li>
+        <li>Text-to-Speech: generate voice-over from card text in one click <span class="badge-pro">Pro</span></li>
+        <li>Entrance/exit animations — slide, fade, bounce, and more</li>
+      </ul>
+    </div>
+    <div class="feat-media" id="vid2">
+      <div class="vid-placeholder">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <p>cards-tts.mp4</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 3: Avatars + Callouts -->
+  <div class="feature">
+    <div class="feat-text">
+      <span class="feat-tag">Feature 03</span>
+      <h2>Avatars &amp; <em>callout bubbles</em></h2>
+      <p>Place character avatars and speech-bubble callouts anywhere on the canvas. Perfect for explainer videos, IVR simulations, and dialogue-driven content.</p>
+      <ul class="feat-bullets">
+        <li>Upload any image as an avatar — circular frame with glow and gradient border</li>
+        <li>Callouts support custom text, positioning, and entrance animations</li>
+        <li>Text-to-Voice on callouts — generate speech audio from callout text <span class="badge-pro">Pro</span></li>
+        <li>Multiple avatar lanes for multi-character scenes</li>
+      </ul>
+    </div>
+    <div class="feat-media" id="vid3">
+      <div class="vid-placeholder">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <p>avatars-callouts.mp4</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="features features-2">
+
+  <!-- FEATURE 4: Zoom -->
+  <div class="feature reverse">
+    <div class="feat-text">
+      <span class="feat-tag">Feature 04</span>
+      <h2>Cinematic <em>zoom &amp; pan</em> keyframes</h2>
+      <p>Add smooth, eased camera zoom movements to any moment in your timeline. Guide the viewer's eye with precision — no video editing experience required.</p>
+      <ul class="feat-bullets">
+        <li>Set start/end zoom level and canvas position per block</li>
+        <li>Expo (fast snap) or Quad (smooth) easing curves</li>
+        <li>Continuous drift zoom — keep zooming after the initial animation</li>
+        <li>Match Previous — one click connects blocks for seamless camera motion</li>
+        <li>Export with Zoom tracks <span class="badge-pro">Pro</span></li>
+      </ul>
+    </div>
+    <div class="feat-media" id="vid4">
+      <div class="vid-placeholder">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <p>zoom.mp4</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 5: 3D Perspective -->
+  <div class="feature">
+    <div class="feat-text">
+      <span class="feat-tag">Feature 05</span>
+      <h2>Full <em>3D perspective</em> camera control</h2>
+      <p>Tilt, rotate, and warp the canvas in 3D space — like a cinematic camera operator on a rig. Animate pitch, depth of field, and focus point over time.</p>
+      <ul class="feat-bullets">
+        <li>Pitch X/Y — tilt the canvas forward, back, left, right in true 3D</li>
+        <li>Depth of Field — blur backgrounds for a macro lens effect</li>
+        <li>Focus X/Y — pin a specific area in sharp focus while the rest blurs</li>
+        <li>Skew, rotation, and position animation between keyframes</li>
+        <li>Export with 3D Perspective tracks <span class="badge-pro">Pro</span></li>
+      </ul>
+    </div>
+    <div class="feat-media" id="vid5">
+      <div class="vid-placeholder">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <p>3d-perspective.mp4</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 6: Backgrounds -->
+  <div class="feature reverse">
+    <div class="feat-text">
+      <span class="feat-tag">Feature 06</span>
+      <h2>Dynamic animated <em>backgrounds</em></h2>
+      <p>Set the mood with stunning animated backgrounds that pulse and flow behind all your content layers. From minimal gradients to full particle systems.</p>
+      <ul class="feat-bullets">
+        <li>Solid colors, linear/radial gradients, and uploaded images</li>
+        <li>8 animated Vanta.js backgrounds — Waves, Fog, Birds, Net, Halo, Clouds, Cells, Dots</li>
+        <li>Multiple background lanes — layer and blend different backgrounds over time</li>
+        <li>Entrance/exit animations on background transitions</li>
+      </ul>
+    </div>
+    <div class="feat-media" id="vid6">
+      <div class="vid-placeholder">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <p>backgrounds.mp4</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 7: AI Transcription / Auto-Generate -->
+  <div class="feature">
+    <div class="feat-text">
+      <span class="feat-tag">Feature 07</span>
+      <h2><em>AI auto-generate</em> your entire timeline</h2>
+      <p>Import audio and let the AI build your entire production for you. Cards, callouts, waveforms, and avatars — all created automatically from your audio in seconds.</p>
+      <ul class="feat-bullets">
+        <li>Transcribes audio with Whisper AI — 100% free, no API key needed</li>
+        <li>Auto-generates Cards with titles and transcribed descriptions</li>
+        <li>Auto-generates Callouts synced to speech segments</li>
+        <li>Auto-generates audio-reactive Spectrum visualizer lanes</li>
+        <li>Toggle each output type on/off before generating</li>
+      </ul>
+    </div>
+    <div class="feat-media" id="vid7">
+      <div class="vid-placeholder">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <p>ai-autogenerate.mp4</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+<!-- features 8-10 + pricing + faq placeholder -->
+<section class="features features-3">
+
+  <!-- FEATURE 8: Whisper Offline STT -->
+  <div class="feature reverse">
+    <div class="feat-text">
+      <span class="feat-tag">Feature 08</span>
+      <h2>Offline <em>speech-to-text</em> with Whisper AI</h2>
+      <p>Transcribe any audio entirely inside your browser using open-source Whisper models — no internet required, no API key, no cost. Your audio never leaves your device.</p>
+      <ul class="feat-bullets">
+        <li>Whisper Tiny (fast), Base, and multilingual models available</li>
+        <li>Runs 100% locally via WebAssembly — completely private</li>
+        <li>Automatically syncs transcribed text to timeline timestamps</li>
+        <li>Supports English and 90+ languages with multilingual models</li>
+        <li>Free — no Pro license required <span class="badge-free">Free</span></li>
+      </ul>
+    </div>
+    <div class="feat-media" id="vid8">
+      <div class="vid-placeholder">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <p>whisper-stt.mp4</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 9: Voice Replace (S2S) -->
+  <div class="feature">
+    <div class="feat-text">
+      <span class="feat-tag">Feature 09</span>
+      <h2><em>Voice replacement</em> &amp; AI voice changer</h2>
+      <p>Replace or transform voices in your audio using ElevenLabs and Azure Speech. Keep the timing and emotion — swap the voice entirely. Perfect for dubbing, character voices, and demos.</p>
+      <ul class="feat-bullets">
+        <li>ElevenLabs Voice Changer — transform voice while preserving emotion and inflection <span class="badge-pro">Pro</span></li>
+        <li>ElevenLabs Full Voice Replace — replace audio with a different AI voice <span class="badge-pro">Pro</span></li>
+        <li>Azure Speech voice replacement — enterprise-grade voice synthesis <span class="badge-pro">Pro</span></li>
+        <li>Works on any media lane audio in the timeline</li>
+      </ul>
+    </div>
+    <div class="feat-media" id="vid9">
+      <div class="vid-placeholder">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <p>voice-replace.mp4</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 10: TTS -->
+  <div class="feature reverse">
+    <div class="feat-text">
+      <span class="feat-tag">Feature 10</span>
+      <h2>Natural <em>text-to-speech</em> narration</h2>
+      <p>Type text on any card or callout and instantly generate a natural-sounding voice-over. Choose from hundreds of AI voices across ElevenLabs and Azure Speech.</p>
+      <ul class="feat-bullets">
+        <li>ElevenLabs TTS — ultra-realistic AI voices with emotion control <span class="badge-pro">Pro</span></li>
+        <li>Azure Speech TTS — 400+ voices across 100+ languages <span class="badge-pro">Pro</span></li>
+        <li>Generated audio attaches directly to the card's timeline block</li>
+        <li>ElevenLabs credit usage shown live in the API Keys panel</li>
+      </ul>
+    </div>
+    <div class="feat-media" id="vid10">
+      <div class="vid-placeholder">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <p>tts.mp4</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-intro" style="padding-bottom:3rem">
+    <h2>Simple, <em>honest</em> pricing</h2>
+    <p>Start free. Upgrade once. Own it forever.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="plan-card">
+      <div class="plan-label">Free</div>
+      <div class="plan-price">$0</div>
+      <div class="plan-desc">Forever free. No credit card.</div>
+      <ul class="plan-features">
+        <li>✦ All timeline lanes (Media, Waves, Cards, Avatars, Callouts, BG, Spectrum)</li>
+        <li>✦ Export at 720p &amp; 1080p / 24–30fps</li>
+        <li>✦ AI Transcription with Whisper (offline)</li>
+        <li>✦ 25+ audio visualizer types</li>
+        <li>✦ 15+ color palettes</li>
+        <li>✦ Zoom &amp; 3D Perspective (preview &amp; edit)</li>
+        <li>✦ Liquid Glass cards, VFX, animated backgrounds</li>
+        <li>✦ Save &amp; load projects</li>
+      </ul>
+      <a href="https://chromewebstore.google.com" class="btn-secondary" style="text-align:center;display:block">Add to Chrome</a>
+    </div>
+    <div class="plan-card plan-pro">
+      <div class="plan-badge">Most Popular</div>
+      <div class="plan-label">Pro</div>
+      <div class="plan-price">$4.99 <span>USD</span></div>
+      <div class="plan-desc">One-time purchase. Yours forever.</div>
+      <ul class="plan-features">
+        <li>✦ Everything in Free</li>
+        <li>✦ Export at 1440p (QHD) &amp; 4K (UHD)</li>
+        <li>✦ Export at 60fps &amp; max refresh rate</li>
+        <li>✦ HDR10 export (HEVC / BT.2020 PQ)</li>
+        <li>✦ Export with Zoom &amp; 3D Perspective tracks</li>
+        <li>✦ ElevenLabs Voice Changer &amp; TTS</li>
+        <li>✦ ElevenLabs Full Voice Replace</li>
+        <li>✦ Azure Speech TTS &amp; Voice Replace</li>
+      </ul>
+      <a href="https://buy.polar.sh/polar_cl_VJxYzCmECdNj0BoWlEFWf6WSoJj5HDme3osSp2bLeTq" class="btn-primary" style="text-align:center;display:block">Upgrade to Pro →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-intro" style="padding-bottom:3rem">
+    <h2>Frequently asked <em>questions</em></h2>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary>Does it work on Mac, Windows, and Linux?</summary>
+      <p>Yes. Spectrum Studio Pro is a Chrome extension and runs on any operating system that supports Google Chrome.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Is my audio uploaded anywhere?</summary>
+      <p>No. All audio processing, AI transcription (Whisper), and rendering happens entirely within your browser. Your files never leave your device.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What's the difference between Free and Pro?</summary>
+      <p>Free gives you the full editing experience including AI transcription, all visual effects, and 1080p export. Pro unlocks 4K/60fps/HDR10 export, Zoom &amp; 3D Perspective export, and ElevenLabs/Azure voice features.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Do I need an ElevenLabs or Azure account?</summary>
+      <p>Only if you want to use the AI voice features. You supply your own API key — we never store it on any server. AI transcription with Whisper is fully free and requires no third-party account.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Is the Pro license a subscription?</summary>
+      <p>No — it's a one-time purchase of $4.99 USD. Pay once, use forever. No recurring charges.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What export formats are supported?</summary>
+      <p>Default export is H.264 MP4. With HDR10 enabled (Pro), it exports HEVC (H.265) MP4 with BT.2020/PQ for HDR displays. Multiple aspect ratios supported including 16:9, 9:16, 1:1, and ultrawide.</p>
+    </details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="nav-logo">⚡ Spectrum Studio Pro</span>
+      <p>Beautiful audio productions, right in your browser.</p>
+    </div>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="https://chromewebstore.google.com">Chrome Web Store</a>
+      <a href="https://buy.polar.sh/polar_cl_VJxYzCmECdNj0BoWlEFWf6WSoJj5HDme3osSp2bLeTq">Get Pro</a>
+    </div>
+    <p class="footer-copy">© 2026 Spectrum Studio Pro · Built with ❤️ for creators</p>
+  </div>
+</footer>
+
+
+
+
+
+<script>
+// Smooth reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+}, {threshold:0.1});
+document.querySelectorAll('.feature').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(40px)';
+  el.style.transition='opacity .7s ease, transform .7s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
