@@ -35,6 +35,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 5% 60px;position:relative;overflow:hidden}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.35}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,13,23,.55) 0%,rgba(11,13,23,.3) 50%,rgba(11,13,23,.85) 100%);z-index:1}
+.hero>*:not(.hero-video):not(.hero-overlay){position:relative;z-index:2}
 .hero::before{content:'';position:absolute;top:-20%;left:30%;width:700px;height:700px;background:radial-gradient(circle,rgba(161,140,209,.12) 0%,transparent 70%);pointer-events:none}
 .hero::after{content:'';position:absolute;bottom:0;right:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,126,179,.08) 0%,transparent 70%);pointer-events:none}
 .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(161,140,209,.1);border:1px solid rgba(161,140,209,.25);border-radius:999px;padding:.35rem 1rem;font-size:.75rem;font-weight:600;color:var(--ts);margin-bottom:1.5rem;letter-spacing:.05em}
@@ -139,7 +142,10 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge"><span></span> Chrome Extension · v1.3.3</div>
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="Videos/Hero background.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
   <h1>Turn audio into <em>stunning visual productions</em></h1>
   <p class="hero-sub">Multi-track timeline editor, AI transcription, voice synthesis, and 4K export — all running directly in your browser. No installs, no subscriptions.</p>
   <div class="hero-btns">
