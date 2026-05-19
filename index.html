@@ -25,13 +25,13 @@ html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tp);overflow-x:hidden}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(11,13,23,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-.nav-logo{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#a18cd1,#ff7eb3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(11,13,23,0.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,126,179,.15);box-shadow:0 1px 20px rgba(255,126,179,.06)}
+.nav-logo{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#a18cd1,#ff7eb3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px;filter:drop-shadow(0 0 8px rgba(255,126,179,.3))}
 .nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{color:var(--ts);text-decoration:none;font-size:0.875rem;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--accent)}
-.nav-cta{background:linear-gradient(135deg,#ff7eb3,#a18cd1);color:#fff;border:none;padding:.5rem 1.25rem;border-radius:999px;font-size:.875rem;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .2s,transform .2s}
-.nav-cta:hover{opacity:.9;transform:scale(1.03)}
+.nav-links a{color:var(--ts);text-decoration:none;font-size:0.875rem;font-weight:500;transition:color .2s,text-shadow .2s}
+.nav-links a:hover{color:var(--accent);text-shadow:0 0 12px rgba(255,126,179,.5)}
+.nav-cta{background:linear-gradient(135deg,#ff7eb3,#a18cd1);color:#fff;border:none;padding:.5rem 1.25rem;border-radius:999px;font-size:.875rem;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .2s,transform .2s,box-shadow .2s;box-shadow:0 0 16px rgba(255,126,179,.3)}
+.nav-cta:hover{opacity:.9;transform:scale(1.03);box-shadow:0 0 24px rgba(255,126,179,.5)}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 5% 60px;position:relative;overflow:hidden}
@@ -47,8 +47,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hero h1 em{font-style:normal;background:linear-gradient(135deg,#ff7eb3,#a18cd1,#8fd3f4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero-sub{font-size:clamp(1rem,2vw,1.25rem);color:var(--ts);max-width:620px;line-height:1.65;margin-bottom:2.5rem;font-weight:400}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem}
-.btn-primary{background:linear-gradient(135deg,#ff7eb3,#a18cd1);color:#fff;border:none;padding:.85rem 2rem;border-radius:999px;font-size:1rem;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 24px rgba(255,126,179,.3)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,126,179,.4)}
+.btn-primary{background:linear-gradient(135deg,#ff7eb3,#a18cd1);color:#fff;border:none;padding:.85rem 2rem;border-radius:999px;font-size:1rem;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 0 20px rgba(255,126,179,.4),0 0 60px rgba(161,140,209,.15)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(255,126,179,.6),0 0 80px rgba(161,140,209,.25)}
 .btn-secondary{background:transparent;color:var(--tp);border:1px solid var(--border);padding:.85rem 2rem;border-radius:999px;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;transition:border-color .2s,color .2s}
 .btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
 .hero-social{display:flex;align-items:center;gap:.5rem;color:var(--ts);font-size:.85rem}
@@ -77,7 +77,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 @keyframes hint-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.05)}}
 
 /* VIDEO PLACEHOLDER */
-.feat-media{border-radius:var(--r);overflow:hidden;background:var(--bg2);border:1px solid var(--border);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.feat-media{border-radius:var(--r);overflow:hidden;background:var(--bg2);border:1px solid rgba(161,140,209,.2);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 0 30px rgba(161,140,209,.08),0 20px 60px rgba(0,0,0,.4);transition:box-shadow .4s ease}
+.feat-media:hover{box-shadow:0 0 40px rgba(255,126,179,.12),0 0 80px rgba(161,140,209,.1),0 20px 60px rgba(0,0,0,.4)}
 
 .vid-placeholder{display:flex;flex-direction:column;align-items:center;gap:.75rem;color:var(--ts);opacity:.5}
 .vid-placeholder svg{width:48px;height:48px;stroke:var(--accent);fill:none;stroke-width:1.5}
@@ -124,6 +125,14 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
 .footer-links a:hover{color:var(--accent)}
 .footer-copy{color:rgba(143,211,244,.4);font-size:.8rem}
 
+/* YOUTUBE DEMO */
+.demo-reel{padding:0 5% 80px;text-align:center}
+.demo-reel h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:#fff;margin-bottom:.5rem}
+.demo-reel h2 em{font-style:normal;background:linear-gradient(135deg,#ff7eb3,#a18cd1,#8fd3f4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.demo-reel p{color:var(--ts);font-size:.95rem;margin-bottom:2rem}
+.demo-frame{max-width:960px;margin:0 auto;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;border:1px solid rgba(255,126,179,.2);box-shadow:0 0 40px rgba(255,126,179,.1),0 0 80px rgba(161,140,209,.08),0 20px 60px rgba(0,0,0,.5)}
+.demo-frame iframe{width:100%;height:100%;border:none}
+
 @media(max-width:768px){
   .feature{grid-template-columns:1fr;gap:2rem}
   .feature.reverse .feat-text{order:1}
@@ -160,6 +169,15 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
   <div class="hero-social">
     <span class="stars">★★★★★</span>
     <span>Loved by creators · One-time $4.99 Pro</span>
+  </div>
+</section>
+
+<!-- YOUTUBE DEMO REEL -->
+<section class="demo-reel">
+  <h2>See it in <em>action</em></h2>
+  <p>Watch the full demo reel — from audio import to 4K export in under 3 minutes.</p>
+  <div class="demo-frame">
+    <iframe src="https://www.youtube.com/embed/xE1BeJUKNfU?rel=0" title="Spectrum Studio Pro Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 </section>
 
@@ -230,10 +248,13 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
       </ul>
     </div>
     <div class="feat-media" id="vid3">
-      <div class="vid-placeholder">
-        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <p>avatars-callouts.mp4</p>
+      <div class="audio-hint">
+        <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+        🔊 Turn on audio
       </div>
+      <video controls muted playsinline>
+        <source src="videos/avatars-callouts.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
@@ -256,10 +277,9 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
       </ul>
     </div>
     <div class="feat-media" id="vid4">
-      <div class="vid-placeholder">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <p>zoom.mp4</p>
-      </div>
+      <video controls muted playsinline>
+        <source src="videos/zoom.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
@@ -278,10 +298,9 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
       </ul>
     </div>
     <div class="feat-media" id="vid5">
-      <div class="vid-placeholder">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <p>3d-perspective.mp4</p>
-      </div>
+      <video controls muted playsinline>
+        <source src="videos/3d-perspective.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
@@ -299,10 +318,9 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
       </ul>
     </div>
     <div class="feat-media" id="vid6">
-      <div class="vid-placeholder">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <p>backgrounds.mp4</p>
-      </div>
+      <video controls muted playsinline>
+        <source src="videos/backgrounds.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
@@ -321,10 +339,9 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
       </ul>
     </div>
     <div class="feat-media" id="vid7">
-      <div class="vid-placeholder">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <p>ai-autogenerate.mp4</p>
-      </div>
+      <video controls muted playsinline>
+        <source src="videos/ai-autogenerate.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
@@ -347,10 +364,13 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
       </ul>
     </div>
     <div class="feat-media" id="vid8">
-      <div class="vid-placeholder">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <p>whisper-stt.mp4</p>
+      <div class="audio-hint">
+        <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+        🔊 Turn on audio
       </div>
+      <video controls muted playsinline>
+        <source src="videos/whisper-stt.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
@@ -368,10 +388,13 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
       </ul>
     </div>
     <div class="feat-media" id="vid9">
-      <div class="vid-placeholder">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <p>voice-replace.mp4</p>
+      <div class="audio-hint">
+        <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+        🔊 Turn on audio
       </div>
+      <video controls muted playsinline>
+        <source src="videos/voice-replace.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
@@ -389,10 +412,13 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
       </ul>
     </div>
     <div class="feat-media" id="vid10">
-      <div class="vid-placeholder">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <p>tts.mp4</p>
+      <div class="audio-hint">
+        <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+        🔊 Turn on audio
       </div>
+      <video controls muted playsinline>
+        <source src="videos/tts.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
@@ -495,15 +521,28 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
 
 
 <script>
-// Smooth reveal on scroll
-const observer = new IntersectionObserver(entries => {
+// Scroll-reveal for feature sections
+const revealObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
 }, {threshold:0.1});
 document.querySelectorAll('.feature').forEach(el => {
   el.style.opacity='0'; el.style.transform='translateY(40px)';
   el.style.transition='opacity .7s ease, transform .7s ease';
-  observer.observe(el);
+  revealObs.observe(el);
 });
+
+// Autoplay videos when centered in viewport, pause when scrolled away
+const videoObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    const vid = e.target;
+    if (e.isIntersecting) {
+      vid.play().catch(() => {});
+    } else {
+      vid.pause();
+    }
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.feat-media video').forEach(v => videoObs.observe(v));
 </script>
 </body>
 </html>
