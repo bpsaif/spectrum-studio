@@ -71,6 +71,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .badge-free{background:rgba(143,211,244,.15);color:#8fd3f4;border:1px solid rgba(143,211,244,.3)}
 .badge-pro{background:rgba(255,126,179,.15);color:#ff7eb3;border:1px solid rgba(255,126,179,.3)}
 
+/* AUDIO HINT BADGE */
+.audio-hint{position:absolute;top:12px;right:12px;z-index:5;display:flex;align-items:center;gap:6px;background:rgba(255,126,179,.9);color:#fff;font-size:.7rem;font-weight:700;padding:.35rem .75rem;border-radius:999px;letter-spacing:.03em;animation:hint-pulse 2s ease-in-out infinite;pointer-events:none}
+.audio-hint svg{width:14px;height:14px;fill:#fff}
+@keyframes hint-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.05)}}
+
 /* VIDEO PLACEHOLDER */
 .feat-media{border-radius:var(--r);overflow:hidden;background:var(--bg2);border:1px solid var(--border);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.4)}
 
@@ -201,10 +206,13 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
       </ul>
     </div>
     <div class="feat-media" id="vid2">
-      <div class="vid-placeholder">
-        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <p>cards-tts.mp4</p>
+      <div class="audio-hint">
+        <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+        🔊 Turn on audio
       </div>
+      <video controls playsinline style="width:100%;height:100%;object-fit:cover">
+        <source src="videos/cards-tts.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
