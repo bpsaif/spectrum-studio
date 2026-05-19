@@ -26,7 +26,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tp);overflo
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(11,13,23,0.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,126,179,.15);box-shadow:0 1px 20px rgba(255,126,179,.06)}
-.nav-logo{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#a18cd1,#ff7eb3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px;filter:drop-shadow(0 0 8px rgba(255,126,179,.3))}
+.nav-logo{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#a18cd1,#ff7eb3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px;filter:drop-shadow(0 0 8px rgba(255,126,179,.3));display:flex;align-items:center;gap:8px}
+.nav-logo img{width:28px;height:28px;object-fit:contain}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{color:var(--ts);text-decoration:none;font-size:0.875rem;font-weight:500;transition:color .2s,text-shadow .2s}
 .nav-links a:hover{color:var(--accent);text-shadow:0 0 12px rgba(255,126,179,.5)}
@@ -145,7 +146,7 @@ footer{border-top:1px solid var(--border);padding:3rem 5%;background:var(--bg)}
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">⚡ Spectrum Studio Pro</span>
+  <span class="nav-logo"><img src="images/logo.png" alt="Logo"> Spectrum Studio Pro</span>
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
     <li><a href="#pricing">Pricing</a></li>
